@@ -1,0 +1,90 @@
+<?php
+/*
+Email autoconfig library for Mozilla Thunderbird 
+Copyright (C) 2013 Julian J. Menendez <julian@maxosystem.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
+/* Define the configuration templates */
+$TEMPLATES=array(
+	"gmail" => array(
+		"id"		=> "gmai.com",
+		"name"		=> "Google Mail",
+		"shortname"	=> "GMail",
+
+		"servers" 	=> array(
+			array(	// IMAP access
+				"type"	=>	"imap",
+				"host"	=>	"imap.gmail.com",
+				"port"	=>	"993",
+				"socket"=>	"SSL",
+				"auth"	=>	"password-cleartext",
+				"user"	=>	"%EMAILADDRESS%",
+			),
+			array(	// POP3 access
+				"type"	=>	"pop3",
+				"host"	=>	"pop.gmail.com",
+				"port"	=>	"995",
+				"socket"=>	"SSL",
+				"auth"	=>	"password-cleartext",
+				"user"	=>	"%EMAILADDRESS%",
+			),
+			array(	//Outgoing mail
+				"type"	=>	"smtp",
+				"host"	=>	"smtp.gmail.com",
+				"port"	=>	"587",
+				"socket"=>	"STARTTLS",
+				"auth"	=>	"password-cleartext",
+				"user"	=>	"%EMAILADDRESS%",
+			),
+		),
+	),
+
+	"ispconfig1" => array(
+		"id"		=> "isp1",
+		"name"		=> "Your company's ISPConfig",
+		"shortname"	=> "ISPConfig",
+
+		"servers" 	=> array(   //Only IMAP for incoming server
+			array(
+				"type"	=>	"imap",
+				"host"	=>	"imap.myserver.com",
+				"port"	=>	"993",
+				"socket"=>	"SSL",
+				"auth"	=>	"password-cleartext",
+				"user"	=>	"%EMAILADDRESS%",
+			),
+			array(
+				"type"	=>	"smtp",
+				"host"	=>	"smtp.myserver.com",
+				"port"	=>	"493",
+				"socket"=>	"SSL",
+				"auth"	=>	"password-cleartext",
+				"user"	=>	"%EMAILADDRESS%",
+			),
+		),
+	),
+);
+		
+
+/* Associate domains with the templates above.
+ *Use the "DEFAULT" keyword to specify a template when the domain isn't defined here
+ */
+$DOMAINS=array(
+	"yourgoogleappsdomain.com" => "gmail",
+	"yourispconfigdomain.com" => "ispconfig1.com",
+	"DEFAULT" => "gmail",  //every other domain is a Google Apps one.
+);
