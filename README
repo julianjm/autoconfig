@@ -1,0 +1,71 @@
+/*
+Email autoconfig library for Mozilla Thunderbird 
+Copyright (C) 2013 Julian J. Menendez <julian@maxosystem.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
+
+Apache configuration
+====================
+
+Declare the virtualhost with the ServerAlias wildcard: autoconfig.*
+That would server all requests to any host name starting with autoconfig.
+
+<VirtualHost *:80>
+        ServerName autoconfig
+        ServerAlias autoconfig.*
+        DocumentRoot /var/www/autoconfig/
+</VirtualHost>
+
+DNS configuration
+=================
+
+Make sure you create a DNS record that points to your server.
+
+autoconfig 		IN	A	1.2.3.4
+
+A CNAME is useful, specially if you need to change the IP in the future:
+
+autoconfig		IN	CNAME	autoconfig.myserver.com
+
+
+Script configuration
+====================
+
+Copy the files to your document root, in this case /var/www/autoconfig/
+
+Create a .htaccess file to redirect requests to /mail/config-v1.1.xml to
+our multidomain.php script.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteBase /
+  RewriteRule ^mail/config-v1\.1\.xml?$ multidomain.php?%{QUERY_STRING} [L]
+</IfModule>
+
+
+Using config.php.sample as a template, create config.php. Define your templates
+and associate domain names with them.
+
+
+TEST
+====
+
+Browse to: http://autodomain.YOURDOMAIN.COM/mail/config-v1.1.xml
+If you get an XML file, it's time to try to create an account in Thunderbird
+
+
+

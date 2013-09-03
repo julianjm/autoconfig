@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteBase /
+  RewriteRule ^mail/config-v1\.1\.xml?$ multidomain.php?%{QUERY_STRING} [L]
+</IfModule>
+
+
