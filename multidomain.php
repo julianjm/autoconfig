@@ -22,7 +22,11 @@ require("Autoconfig.class.php");
 
 
 //Get the requested domain
-$domain = $_SERVER['HTTP_HOST'];
+$domain = isset($_SERVER['HTTP_HOST'])?$_SERVER['HTTP_HOST']:null;
+if (is_null($domain) && $_SERVER['argc']>1)
+	$domain=$_SERVER['argv'][1];
+if (is_null($domain))
+	die("No domain provided");
 $domain = strtolower( str_replace("autoconfig.","",$domain) );
 
 

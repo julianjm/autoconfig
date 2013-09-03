@@ -64,8 +64,11 @@ and associate domain names with them.
 TEST
 ====
 
-Browse to: http://autodomain.YOURDOMAIN.COM/mail/config-v1.1.xml
-If you get an XML file, it's time to try to create an account in Thunderbird
+1) $ php multidomain.php domaintotest.com
+
+2) Browse to: http://autodomain.YOURDOMAIN.COM/mail/config-v1.1.xml
+
+3) If you get an XML file, it's time to try to create an account in Thunderbird
 
 
 
