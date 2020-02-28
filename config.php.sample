@@ -85,6 +85,6 @@ $TEMPLATES=array(
  */
 $DOMAINS=array(
 	"yourgoogleappsdomain.com" => "gmail",
-	"yourispconfigdomain.com" => "ispconfig1.com",
+	"yourispconfigdomain.com" => "ispconfig1",
 	"DEFAULT" => "gmail",  //every other domain is a Google Apps one.
 );
